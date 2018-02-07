@@ -125,7 +125,28 @@ function getRoundWinner(roundNumber)
 
 function getGameWinner()
 {
+    let winnerRoundOne = getRoundWinner(1);
+    let winnerRoundTwo = getRoundWinner(2);
+    let winnerRoundThree = getRoundWinner(3);
+    let valuePlayerOne = playerOneMoveOneValue + playerOneMoveTwoValue + playerOneMoveThreeValue;
+    let valuePlayerTwo = playerTwoMoveOneValue + playerTwoMoveTwoValue + playerOneMoveThreeValue;
+    let scorePlayerOne = 0;
+    let scorePlayerTwo = 0;
+    let overallWinner = ' ';
 
+      winnerRoundOne === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
+      winnerRoundTwo === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
+      winnerRoundThree === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
+
+      if (scorePlayerTwo > scorePlayerOne || valuePlayerTwo > valuePlayerOne) {
+           overallWinner = 'Player Two';
+      } else if (scorePlayerOne > scorePlayerTwo || valuePlayerOne > valuePlayerTwo) {
+           overallWinner = 'Player One'
+      } else if (scorePlayerOne === scorePlayerTwo && valuePlayerOne === valuePlayerTwo) {
+          overallWinner = 'Tie';
+      }
+
+      return overallWinner;
 }
 
 function setComputerMoves()
