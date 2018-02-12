@@ -22,37 +22,40 @@ let playerTwoMoveThreeValue;
 function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoValue,
               moveThreeType, moveThreeValue)
 {
-    if ( player === 'Player One') {
-      playerOneMoveOneType = moveOneType;
-      playerOneMoveOneValue = moveOneValue;
-      playerOneMoveTwoType = moveTwoType;
-      playerOneMoveTwoValue = moveTwoValue;
-      playerOneMoveThreeType = moveThreeType;
-      playerOneMoveThreeValue = moveThreeValue;
-    } else if (player === 'Player Two') {
-      playerTwoMoveOneType = moveOneType;
-      playerTwoMoveOneValue = moveOneValue;
-      playerTwoMoveTwoType = moveTwoType;
-      playerTwoMoveTwoValue = moveTwoValue;
-      playerTwoMoveThreeType = moveThreeType;
-      playerTwoMoveThreeValue = moveThreeValue;
-    } else {
-      playerOneMoveOneType = undefined;
-      playerOneMoveOneValue = undefined;
-      playerOneMoveTwoType = undefined;
-      playerOneMoveTwoValue = undefined;
-      playerOneMoveThreeType = undefined;
-      playerOneMoveThreeValue = undefined;
+    if (moveOneType === undefined || moveTwoType === undefined  || moveThreeType === undefined ) {
+      return undefined;
+    }
+    if (  moveOneType != 'rock' && moveOneType != 'scissors' && moveOneType != 'paper' ||
+            moveTwoType != 'rock' && moveTwoType != 'scissors' && moveTwoType != 'paper' ||
+          moveThreeType != 'rock' && moveThreeType != 'scissors' && moveThreeType != 'paper' ||
+          moveOneValue < 1 || moveOneValue > 99 || moveTwoValue < 1 || moveTwoValue > 99 || moveThreeValue < 1
+             || moveThreeValue > 99) {
+            return undefined;
+          }
+    if(moveOneValue === undefined || moveTwoValue === undefined || moveThreeValue === undefined ) {
+      return undefined;
+    }
 
-      playerTwoMoveOneType = undefined;
-      playerTwoMoveOneValue = undefined;
-      playerTwoMoveTwoType = undefined;
-      playerTwoMoveTwoValue = undefined;
-      playerTwoMoveThreeType = undefined;
-      playerTwoMoveThreeValue = undefined;
+      if ( player === 'Player One') {
+        playerOneMoveOneType = moveOneType;
+        playerOneMoveOneValue = moveOneValue;
+        playerOneMoveTwoType = moveTwoType;
+        playerOneMoveTwoValue = moveTwoValue;
+        playerOneMoveThreeType = moveThreeType;
+        playerOneMoveThreeValue = moveThreeValue;
+    } else if (player === 'Player Two') {
+        playerTwoMoveOneType = moveOneType;
+        playerTwoMoveOneValue = moveOneValue;
+        playerTwoMoveTwoType = moveTwoType;
+        playerTwoMoveTwoValue = moveTwoValue;
+        playerTwoMoveThreeType = moveThreeType;
+        playerTwoMoveThreeValue = moveThreeValue;
+    } else if (player === null)  {
+       return null;
     }
 
 }
+
 
 function getRoundWinner(roundNumber)
 {
@@ -144,9 +147,9 @@ function getGameWinner()
 
 
     //  console.log()
-     console.log(`Round ${i} Winner:  ${getRoundWinner(i)}`);
-     console.log(` Player Two Score: ${scorePlayerTwo}`);
-      console.log( ` Player One Score: ${scorePlayerOne}`);
+     //console.log(`Round ${i} Winner:  ${getRoundWinner(i)}`);
+     //console.log(` Player Two Score: ${scorePlayerTwo}`);
+      //console.log( ` Player One Score: ${scorePlayerOne}`);
     }
 
     if (scorePlayerOne > scorePlayerTwo) {
