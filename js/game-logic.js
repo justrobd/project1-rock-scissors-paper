@@ -80,7 +80,7 @@ function getRoundWinner(roundNumber)
 
         playerOneMoveTwoValue > playerTwoMoveOneValue ? 'Player One' : 'Player Two';
 
-        if(playerOneMoveTwoType === 'rock' && playerTwoMoveTwoType === 'pape') {
+        if(playerOneMoveTwoType === 'rock' && playerTwoMoveTwoType === 'paper') {
         return 'Player Two';
       } else if (playerOneMoveTwoType === 'scissors' && playerTwoMoveTwoType === 'rock') {
         return 'Player Two';
@@ -125,28 +125,41 @@ function getRoundWinner(roundNumber)
 
 function getGameWinner()
 {
-    let winnerRoundOne = getRoundWinner(1);
-    let winnerRoundTwo = getRoundWinner(2);
-    let winnerRoundThree = getRoundWinner(3);
-    let valuePlayerOne = playerOneMoveOneValue + playerOneMoveTwoValue + playerOneMoveThreeValue;
-    let valuePlayerTwo = playerTwoMoveOneValue + playerTwoMoveTwoValue + playerOneMoveThreeValue;
     let scorePlayerOne = 0;
     let scorePlayerTwo = 0;
-    let overallWinner = ' ';
+    const playerTie = 'Tie';
 
-      winnerRoundOne === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
-      winnerRoundTwo === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
-      winnerRoundThree === 'Player Two' ? scorePlayerTwo++ : scorePlayerOne++;
-
-      if (scorePlayerTwo > scorePlayerOne || valuePlayerTwo > valuePlayerOne) {
-           overallWinner = 'Player Two';
-      } else if (scorePlayerOne > scorePlayerTwo || valuePlayerOne > valuePlayerTwo) {
-           overallWinner = 'Player One'
-      } else if (scorePlayerOne === scorePlayerTwo && valuePlayerOne === valuePlayerTwo) {
-          overallWinner = 'Tie';
+    for (let i = 1; i < 4 ; i++) {
+      if (getRoundWinner(i) === 'Player One' ) {
+        scorePlayerOne++;
+      } else if (getRoundWinner(i) === 'Player Two') {
+        scorePlayerTwo++;
+      } else if (getRoundWinner(i) === 'Tie' && playerOneMoveThreeValue > playerTwoMoveThreeValue) {
+        scorePlayerOne++;
+      } else if (getRoundWinner(i) === 'Tie' && playerTwoMoveThreeValue > playerOneMoveThreeValue) {
+        scorePlayerTwo++;
+      }  else if (getRoundWinner(i) === 'Tie' && playerOneMoveThreeValue === playerTwoMoveThreeValue)  {
+        playerTie;
       }
 
-      return overallWinner;
+
+    //  console.log()
+     console.log(`Round ${i} Winner:  ${getRoundWinner(i)}`);
+     console.log(` Player Two Score: ${scorePlayerTwo}`);
+      console.log( ` Player One Score: ${scorePlayerOne}`);
+    }
+
+    if (scorePlayerOne > scorePlayerTwo) {
+      return 'Player One';
+    } else if (scorePlayerTwo > scorePlayerOne) {
+      return 'Player Two';
+    } else {
+      return playerTie;
+    }
+
+
+
+
 }
 
 function setComputerMoves()
