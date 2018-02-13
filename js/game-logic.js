@@ -162,13 +162,10 @@ function getGameWinner()
         scorePlayerTwo++;
       }  else if (getRoundWinner(i) === 'Tie' && playerOneMoveThreeValue === playerTwoMoveThreeValue)  {
         playerTie;
+      } else {
+        return null;
       }
 
-
-    //  console.log()
-     //console.log(`Round ${i} Winner:  ${getRoundWinner(i)}`);
-     //console.log(` Player Two Score: ${scorePlayerTwo}`);
-      //console.log( ` Player One Score: ${scorePlayerOne}`);
     }
 
     if (scorePlayerOne > scorePlayerTwo) {
@@ -178,13 +175,9 @@ function getGameWinner()
     } else {
       return playerTie;
     }
-
-
-
-
 }
 
 function setComputerMoves()
 {
-
+    setPlayerMoves('Player Two', 'rock', 33, 'paper', 22, 'scissors', 44);   
 }
